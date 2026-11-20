@@ -1,0 +1,539 @@
+# https://learn.microsoft.com/en-us/azure/governance/policy/concepts/remediation-structure
+
+Source: https://learn.microsoft.com/en-us/azure/governance/policy/concepts/remediation-structure
+
+---
+
+id="main"
+ role="main"
+ class="layout-body-main "
+ data-bi-name="content"
+ lang="en-us"
+ dir="ltr"
+ >
+ 
+ 
+ 
+ 
+ 
+ Table of contents 
+ 
+ 
+ 
+ Exit editor mode
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Reading mode
+ 
+ 
+ 
+ 
+ Table of contents
+ 
+ 
+ 
+ 
+ 
+ 
+ Read in English
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Add
+ 
+ 
+ 
+ 
+ 
+ 
+ Add to Plans
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Edit
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Copy Markdown
+ 
+ 
+ 
+ 
+ 
+ 
+ Print
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Note
+ 
+
+ 
+ Access to this page requires authorization. You can try signing in or changing directories.
+ 
+
+ 
+ Access to this page requires authorization. You can try changing directories.
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+# Azure Policy remediation task structure
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Feedback
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Summarize this article for me
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+## 
+ In this article
+ 
+
+ 
+ The Azure Policy remediation task feature is used to bring resources into compliance established from a definition and assignment. Resources that are non-compliant to a modify or deployIfNotExists definition assignment, can be brought into compliance using a remediation task. A remediation task deploys the `deployIfNotExists` template or the `modify` operations to the selected non-compliant resources using the identity specified in the assignment. For more information, see policy assignment structure to understand how the identity is defined and remediate non-compliant resources tutorial to configure the identity.
+
+Remediation tasks remediate existing resources that aren't compliant. Resources that are newly created or updated that are applicable to a `deployIfNotExists` or `modify` definition assignment are automatically remediated.
+
+Note
+
+The Azure Policy service deletes remediation task resources 60 days after their last modification.
+
+You use JavaScript Object Notation (JSON) to create a policy remediation task. The policy remediation task contains elements for:
+
+- policy assignment
+
+- policy definitions within an initiative
+
+- resource count and parallel deployments
+
+- failure threshold
+
+- remediation filters
+
+- resource discovery mode
+
+- provisioning state and deployment summary
+
+For example, the following JSON shows a policy remediation task for policy definition named `requiredTags` a part of an initiative assignment named `resourceShouldBeCompliantInit` with all default settings.
+
+`{
+ "id": "/subscriptions/{subId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/remediations/remediateNotCompliant",
+ "apiVersion": "2021-10-01",
+ "name": "remediateNotCompliant",
+ "type": "Microsoft.PolicyInsights/remediations",
+ "properties": {
+ "policyAssignmentId": "/subscriptions/{subID}/providers/Microsoft.Authorization/policyAssignments/resourceShouldBeCompliantInit",
+ "policyDefinitionReferenceId": "requiredTags",
+ "resourceCount": 42,
+ "parallelDeployments": 6,
+ "failureThreshold": {
+ "percentage": 0.1
+ }
+ }
+}
+`
+
+Steps on how to trigger a remediation task at how to remediate non-compliant resources guide. These settings can't be changed after the remediation task begins.
+
+## Policy assignment ID
+
+This field must be the full path name of either a policy assignment or an initiative assignment. `policyAssignmentId` is a string and not an array. This property defines which assignment the parent resource hierarchy or individual resource to remediate.
+
+## Policy definition ID
+
+If the `policyAssignmentId` is for an initiative assignment, the `policyDefinitionReferenceId` property must be used to specify which policy definition in the initiative the subject resources are to be remediated. As a remediation can only remediate in a scope of one definition, this property is a string and not an array. The value must match the value in the initiative definition in the `policyDefinitions.policyDefinitionReferenceId` field instead of the global identifier for policy definition `Id`.
+
+## Resource count and parallel deployments
+
+Use `resourceCount` to determine how many non-compliant resources to remediate in a given remediation task. The default value is 500, with the maximum number being 50,000. `parallelDeployments` determines how many of those resources to remediate at the same time. The allowed range is between 1 to 30 with the default value being 10.
+
+Parallel deployments are the number of deployments within a singular remediation task with a maximum of 30. There can be a maximum of 100 remediation tasks running in parallel for a single policy definition or policy reference within an initiative.
+
+## Failure threshold
+
+An optional property used to specify whether the remediation task should fail if the percentage of failures exceeds the given threshold. The `failureThreshold` is represented as a percentage number from 0 to 100. By default, the failure threshold is 100%, meaning that the remediation task continues to remediate other resources even if resources fail to remediate.
+
+## Remediation filters
+
+An optional property refines what resources are applicable to the remediation task. The allowed filter is resource location. Unless specified, resources from any region can be remediated.
+
+## Resource discovery mode
+
+This property decides how to discover resources that are eligible for remediation. For a resource to be eligible, it must be non-compliant. By default, this property is set to `ExistingNonCompliant`. It could also be set to `ReEvaluateCompliance`, which triggers a new compliance scan for that assignment and remediate any resources that are found non-compliant.
+
+## Provisioning state and deployment summary
+
+Once a remediation task is created, `ProvisioningState` and `DeploymentSummary` properties are populated. The `ProvisioningState` indicates the status of the remediation task. Allow values are `Running`, `Canceled`, `Cancelling`, `Failed`, `Complete`, or `Succeeded`. The `DeploymentSummary` is an array property indicating the number of deployments along with number of successful and failed deployments.
+
+Sample of remediation task that completed successfully:
+
+`{
+ "id": "/subscriptions/{subId}/resourceGroups/ExemptRG/providers/Microsoft.PolicyInsights/remediations/remediateNotCompliant",
+ "Type": "Microsoft.PolicyInsights/remediations",
+ "Name": "remediateNotCompliant",
+ "PolicyAssignmentId": "/subscriptions/{mySubscriptionID}/providers/Microsoft.Authorization/policyAssignments/resourceShouldBeCompliantInit",
+ "policyDefinitionReferenceId": "requiredTags",
+ "resourceCount": 42,
+ "parallelDeployments": 6,
+ "failureThreshold": {
+ "percentage": 0.1
+ },
+ "ProvisioningState": "Succeeded",
+ "DeploymentSummary": {
+ "TotalDeployments": 42,
+ "SuccessfulDeployments": 42,
+ "FailedDeployments": 0
+ },
+}
+`
+
+## Next steps
+
+- Understand how to determine causes of non-compliance.
+
+- Learn how to get compliance data.
+
+- Learn how to remediate non-compliant resources.
+
+- Understand how to react to Azure Policy state change events.
+
+- Learn about the policy definition structure.
+
+- Learn about the policy assignment structure.
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+## Feedback
+
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Yes
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix? 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+## 
+ Additional resources
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+- 
+ 
+ Last updated on 
+ 2025-03-04
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+### In this article
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix?

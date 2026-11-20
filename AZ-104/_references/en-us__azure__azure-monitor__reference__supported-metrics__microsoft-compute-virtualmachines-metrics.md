@@ -1,0 +1,1179 @@
+# https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-compute-virtualmachines-metrics
+
+Source: https://learn.microsoft.com/en-us/azure/azure-monitor/reference/supported-metrics/microsoft-compute-virtualmachines-metrics
+
+---
+
+id="main"
+ role="main"
+ class="layout-body-main "
+ data-bi-name="content"
+ lang="en-us"
+ dir="ltr"
+ >
+ 
+ 
+ 
+ 
+ 
+ Table of contents 
+ 
+ 
+ 
+ Exit editor mode
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Reading mode
+ 
+ 
+ 
+ 
+ Table of contents
+ 
+ 
+ 
+ 
+ 
+ 
+ Read in English
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Add
+ 
+ 
+ 
+ 
+ 
+ 
+ Add to Plans
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Edit
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Copy Markdown
+ 
+ 
+ 
+ 
+ 
+ 
+ Print
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Note
+ 
+
+ 
+ Access to this page requires authorization. You can try signing in or changing directories.
+ 
+
+ 
+ Access to this page requires authorization. You can try changing directories.
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+# Supported metrics for Microsoft.Compute/virtualMachines
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Feedback
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Summarize this article for me
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+## 
+ In this article
+ 
+
+ 
+ The following table lists the metrics available for the Microsoft.Compute/virtualMachines resource type.
+
+Table headings
+
+- Metric - The metric display name as it appears in the Azure portal.
+
+- Name in Rest API - Metric name as referred to in the REST API.
+
+- Advanced platform metrics - A premium, paid tier of platform metrics in Azure Monitor that provide more granular observability for Azure resources.
+
+- Unit - Unit of measure.
+
+- Aggregation - The default aggregation type. Valid values: Average, Minimum, Maximum, Total, Count.
+
+- Dimensions - Dimensions available for the metric.
+
+- Time Grains - Intervals at which the metric is sampled. For example, `PT1M` indicates that the metric is sampled every minute, `PT30M` every 30 minutes, `PT1H` every hour, and so on.
+
+- DS Export - Shows whether the metric is exportable to Azure Monitor Logs via Diagnostic Settings.
+
+For information on exporting metrics, see - Metrics export using data collection rules and Create diagnostic settings in Azure Monitor.
+
+For information on metric retention, see Azure Monitor Metrics overview.
+
+For a list of supported logs, see Supported log categories - Microsoft.Compute/virtualMachines
+
+### Category: Other
+
+Metric
+Name in REST API
+Advanced platform metrics
+Unit
+Aggregation
+Dimensions
+Time Grains
+DS Export
+
+Available Memory Bytes
+
+Amount of physical memory, in bytes, immediately available for allocation to a process or for system use in the Virtual Machine
+`Available Memory Bytes`
+No
+Bytes
+Average
+<none>
+PT1M
+Yes
+
+Available Memory Percentage
+
+Amount of physical memory, in percentage, immediately available for allocation to a process or for system use in the Virtual Machine
+`Available Memory Percentage`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+CPU Credits Consumed
+
+Total number of credits consumed by the Virtual Machine. Only available on B-series burstable VMs
+`CPU Credits Consumed`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+CPU Credits Remaining
+
+Total number of credits available to burst. Only available on B-series burstable VMs
+`CPU Credits Remaining`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+Data Disk Bandwidth Consumed Percentage
+
+Percentage of data disk bandwidth consumed per minute. Only available on VM series that support premium storage.
+`Data Disk Bandwidth Consumed Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk IOPS Consumed Percentage
+
+Percentage of data disk I/Os consumed per minute. Only available on VM series that support premium storage.
+`Data Disk IOPS Consumed Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Latency
+
+Average time to complete each IO during monitoring period for Data Disk. Values are in milliseconds.
+`Data Disk Latency`
+No
+Milliseconds
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Max Burst Bandwidth
+
+Maximum bytes per second throughput Data Disk can achieve with bursting
+`Data Disk Max Burst Bandwidth`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Max Burst IOPS
+
+Maximum IOPS Data Disk can achieve with bursting
+`Data Disk Max Burst IOPS`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Queue Depth
+
+Data Disk Queue Depth(or Queue Length)
+`Data Disk Queue Depth`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Read Bytes/Sec
+
+Bytes/Sec read from a single disk during monitoring period
+`Data Disk Read Bytes/sec`
+No
+BytesPerSecond
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Read Operations/Sec
+
+Read IOPS from a single disk during monitoring period
+`Data Disk Read Operations/Sec`
+No
+CountPerSecond
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Target Bandwidth
+
+Baseline bytes per second throughput Data Disk can achieve without bursting
+`Data Disk Target Bandwidth`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Target IOPS
+
+Baseline IOPS Data Disk can achieve without bursting
+`Data Disk Target IOPS`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Used Burst BPS Credits Percentage
+
+Percentage of Data Disk burst bandwidth credits used so far
+`Data Disk Used Burst BPS Credits Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Used Burst IO Credits Percentage
+
+Percentage of Data Disk burst I/O credits used so far
+`Data Disk Used Burst IO Credits Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Write Bytes/Sec
+
+Bytes/Sec written to a single disk during monitoring period
+`Data Disk Write Bytes/sec`
+No
+BytesPerSecond
+Average
+`LUN`
+PT1M
+Yes
+
+Data Disk Write Operations/Sec
+
+Write IOPS from a single disk during monitoring period
+`Data Disk Write Operations/Sec`
+No
+CountPerSecond
+Average
+`LUN`
+PT1M
+Yes
+
+Disk Read Bytes
+
+Bytes read from disk during monitoring period
+`Disk Read Bytes`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+Disk Read Operations/Sec
+
+Disk Read IOPS
+`Disk Read Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Disk Write Bytes
+
+Bytes written to disk during monitoring period
+`Disk Write Bytes`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+Disk Write Operations/Sec
+
+Disk Write IOPS
+`Disk Write Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Inbound Flows
+
+Inbound Flows are number of current flows in the inbound direction (traffic going into the VM)
+`Inbound Flows`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+Inbound Flows Maximum Creation Rate
+
+The maximum creation rate of inbound flows (traffic going into the VM)
+`Inbound Flows Maximum Creation Rate`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Network In Billable (Deprecated)
+
+The number of billable bytes received on all network interfaces by the Virtual Machine(s) (Incoming Traffic) (Deprecated)
+`Network In`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+Network In Total
+
+The number of bytes received on all network interfaces by the Virtual Machine(s) (Incoming Traffic)
+`Network In Total`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+Network Out Billable (Deprecated)
+
+The number of billable bytes out on all network interfaces by the Virtual Machine(s) (Outgoing Traffic) (Deprecated)
+`Network Out`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+Network Out Total
+
+The number of bytes out on all network interfaces by the Virtual Machine(s) (Outgoing Traffic)
+`Network Out Total`
+No
+Bytes
+Total (Sum)
+<none>
+PT1M
+Yes
+
+OS Disk Bandwidth Consumed Percentage
+
+Percentage of operating system disk bandwidth consumed per minute. Only available on VM series that support premium storage.
+`OS Disk Bandwidth Consumed Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk IOPS Consumed Percentage
+
+Percentage of operating system disk I/Os consumed per minute. Only available on VM series that support premium storage.
+`OS Disk IOPS Consumed Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Latency
+
+Average time to complete each IO during monitoring period for OS Disk. Values are in milliseconds.
+`OS Disk Latency`
+No
+Milliseconds
+Average
+<none>
+PT1M
+Yes
+
+OS Disk Max Burst Bandwidth
+
+Maximum bytes per second throughput OS Disk can achieve with bursting
+`OS Disk Max Burst Bandwidth`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Max Burst IOPS
+
+Maximum IOPS OS Disk can achieve with bursting
+`OS Disk Max Burst IOPS`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Queue Depth
+
+OS Disk Queue Depth(or Queue Length)
+`OS Disk Queue Depth`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+OS Disk Read Bytes/Sec
+
+Bytes/Sec read from a single disk during monitoring period for OS disk
+`OS Disk Read Bytes/sec`
+No
+BytesPerSecond
+Average
+<none>
+PT1M
+Yes
+
+OS Disk Read Operations/Sec
+
+Read IOPS from a single disk during monitoring period for OS disk
+`OS Disk Read Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+OS Disk Target Bandwidth
+
+Baseline bytes per second throughput OS Disk can achieve without bursting
+`OS Disk Target Bandwidth`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Target IOPS
+
+Baseline IOPS OS Disk can achieve without bursting
+`OS Disk Target IOPS`
+No
+Count
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Used Burst BPS Credits Percentage
+
+Percentage of OS Disk burst bandwidth credits used so far
+`OS Disk Used Burst BPS Credits Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Used Burst IO Credits Percentage
+
+Percentage of OS Disk burst I/O credits used so far
+`OS Disk Used Burst IO Credits Percentage`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+OS Disk Write Bytes/Sec
+
+Bytes/Sec written to a single disk during monitoring period for OS disk
+`OS Disk Write Bytes/sec`
+No
+BytesPerSecond
+Average
+<none>
+PT1M
+Yes
+
+OS Disk Write Operations/Sec
+
+Write IOPS from a single disk during monitoring period for OS disk
+`OS Disk Write Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Outbound Flows
+
+Outbound Flows are number of current flows in the outbound direction (traffic going out of the VM)
+`Outbound Flows`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+Outbound Flows Maximum Creation Rate
+
+The maximum creation rate of outbound flows (traffic going out of the VM)
+`Outbound Flows Maximum Creation Rate`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Percentage CPU
+
+The percentage of allocated compute units that are currently in use by the Virtual Machine(s)
+`Percentage CPU`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+Premium Data Disk Cache Read Hit
+
+Premium Data Disk Cache Read Hit
+`Premium Data Disk Cache Read Hit`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Premium Data Disk Cache Read Miss
+
+Premium Data Disk Cache Read Miss
+`Premium Data Disk Cache Read Miss`
+No
+Percent
+Average
+`LUN`
+PT1M
+Yes
+
+Premium OS Disk Cache Read Hit
+
+Premium OS Disk Cache Read Hit
+`Premium OS Disk Cache Read Hit`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+Premium OS Disk Cache Read Miss
+
+Premium OS Disk Cache Read Miss
+`Premium OS Disk Cache Read Miss`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Latency (Preview)
+
+Average time to complete each IO during monitoring period for Temp Disk. Values are in milliseconds.
+`Temp Disk Latency`
+No
+Milliseconds
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Queue Depth
+
+Temp Disk Queue Depth(or Queue Length).
+`Temp Disk Queue Depth`
+No
+Count
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Read Bytes/Sec
+
+Bytes/Sec read from a single disk during monitoring period for Temp Disk.
+`Temp Disk Read Bytes/sec`
+No
+BytesPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Read Operations/Sec
+
+Read IOPS from a single disk during monitoring period for Temp Disk.
+`Temp Disk Read Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Write Bytes/Sec
+
+Bytes/Sec written to a single disk during monitoring period for Temp Disk.
+`Temp Disk Write Bytes/sec`
+No
+BytesPerSecond
+Average
+<none>
+PT1M
+Yes
+
+Temp Disk Write Operations/Sec
+
+Write IOPS from a single disk during monitoring period for Temp Disk.
+`Temp Disk Write Operations/Sec`
+No
+CountPerSecond
+Average
+<none>
+PT1M
+Yes
+
+VM Cached Bandwidth Consumed Percentage
+
+Percentage of cached disk bandwidth consumed by the VM. Only available on VM series that support premium storage.
+`VM Cached Bandwidth Consumed Percentage`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+VM Cached IOPS Consumed Percentage
+
+Percentage of cached disk IOPS consumed by the VM. Only available on VM series that support premium storage.
+`VM Cached IOPS Consumed Percentage`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+VM Cached Used Burst BPS Credits Percentage
+
+Percentage of Cached Burst BPS Credits used by the VM.
+`VM Local Used Burst BPS Credits Percentage`
+No
+Percent
+Average, Minimum, Maximum
+<none>
+PT1M
+Yes
+
+VM Cached Used Burst IO Credits Percentage
+
+Percentage of Cached Burst IO Credits used by the VM.
+`VM Local Used Burst IO Credits Percentage`
+No
+Percent
+Average, Minimum, Maximum
+<none>
+PT1M
+Yes
+
+VM Uncached Used Burst BPS Credits Percentage
+
+Percentage of Uncached Burst BPS Credits used by the VM.
+`VM Remote Used Burst BPS Credits Percentage`
+No
+Percent
+Average, Minimum, Maximum
+<none>
+PT1M
+Yes
+
+VM Uncached Used Burst IO Credits Percentage
+
+Percentage of Uncached Burst IO Credits used by the VM.
+`VM Remote Used Burst IO Credits Percentage`
+No
+Percent
+Average, Minimum, Maximum
+<none>
+PT1M
+Yes
+
+VM Uncached Bandwidth Consumed Percentage
+
+Percentage of uncached disk bandwidth consumed by the VM. Only available on VM series that support premium storage.
+`VM Uncached Bandwidth Consumed Percentage`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+VM Uncached IOPS Consumed Percentage
+
+Percentage of uncached disk IOPS consumed by the VM. Only available on VM series that support premium storage.
+`VM Uncached IOPS Consumed Percentage`
+No
+Percent
+Average
+<none>
+PT1M
+Yes
+
+VM Availability Metric
+
+Measure of availability of virtual machines over time.
+`VmAvailabilityMetric`
+No
+Count
+Average, Minimum, Maximum
+`Context`
+PT1M
+Yes
+
+## Next steps
+
+- Read about metrics in Azure Monitor
+
+- Metrics export using data collection rules
+
+- Create alerts on metrics
+
+- Export metrics to storage, Event Hub, or Log Analytics
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+## Feedback
+
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Yes
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix? 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+## 
+ Additional resources
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+- 
+ 
+ Last updated on 
+ 2026-11-09
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+### In this article
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix?

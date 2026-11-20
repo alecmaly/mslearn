@@ -1,0 +1,583 @@
+# https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-troubleshoot-linux-vm-rsyslog
+
+Source: https://learn.microsoft.com/en-us/azure/azure-monitor/agents/azure-monitor-agent-troubleshoot-linux-vm-rsyslog
+
+---
+
+id="main"
+ role="main"
+ class="layout-body-main "
+ data-bi-name="content"
+ lang="en-us"
+ dir="ltr"
+ >
+ 
+ 
+ 
+ 
+ 
+ Table of contents 
+ 
+ 
+ 
+ Exit editor mode
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Reading mode
+ 
+ 
+ 
+ 
+ Table of contents
+ 
+ 
+ 
+ 
+ 
+ 
+ Read in English
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Add
+ 
+ 
+ 
+ 
+ 
+ 
+ Add to Plans
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Edit
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Copy Markdown
+ 
+ 
+ 
+ 
+ 
+ 
+ Print
+ 
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Note
+ 
+
+ 
+ Access to this page requires authorization. You can try signing in or changing directories.
+ 
+
+ 
+ Access to this page requires authorization. You can try changing directories.
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+# Troubleshoot syslog issues with Azure Monitor Agent on Linux
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Feedback
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Summarize this article for me
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+## 
+ In this article
+ 
+
+ 
+ Use this article to diagnose and resolve issues where syslog events on a Linux VM aren't collected or forwarded to a Log Analytics workspace by Azure Monitor Agent.
+
+During installation, Azure Monitor Agent installs an output configuration for the system's syslog daemon. This configuration defines how to forward events from the daemon to Azure Monitor Agent. You can find it at:
+
+- `/etc/rsyslog.d/10-azuremonitoragent-omfwd.conf` for rsyslog (most Linux distributions)
+
+- `/etc/syslog-ng/conf.d/azuremonitoragent-tcp.conf` for syslog-ng
+
+Azure Monitor Agent listens on a TCP port (logged at `/etc/opt/microsoft/azuremonitoragent/config-cache/syslog.port`) to receive events from rsyslog or syslog-ng. It filters these events based on facility or severity values defined in the data collection rule (DCR) located in `/etc/opt/microsoft/azuremonitoragent/config-cache/configchunks/`. The agent drops events that don't match the DCR configuration.
+
+Note
+
+Before version 1.28, Azure Monitor Agent used a Unix domain socket instead of a TCP port to receive events from rsyslog. The `omfwd` output module in rsyslog offers spooling and retry mechanisms for improved reliability.
+
+Azure Monitor Agent parses incoming syslog messages according to RFC3164 and RFC5424 and also supports other formats. It determines the destination endpoint for each event from the DCR and attempts to upload the events accordingly.
+
+Note
+
+- If Azure Monitor Agent is unreachable or experiencing delays, the syslog daemon buffers events by using its internal queues.
+
+- If Azure Monitor Agent fails to upload events it received from rsyslog or syslog-ng, it queues them in `/var/opt/microsoft/azuremonitoragent/events` by using its local persistence mechanism.
+
+## Diagnose syslog upload failures
+
+If Azure Monitor Agent successfully receives syslog events from `rsyslog` or `syslog-ng`, but the data doesn't appear in the Log Analytics workspace, the most common causes are related to connectivity, configuration, or authentication - not local disk usage.
+
+Common causes include:
+
+- The Data Collection Rule (DCR) isn't associated with the machine
+
+If you don't associate a DCR (or if you associate the wrong DCR), Azure Monitor Agent doesn't know where to send the data.
+
+- The DCR doesn't include a syslog data source or the facility/severity doesn't match
+
+In this case, Azure Monitor Agent drops the events after receiving them.
+
+- The machine can't reach the Azure Monitor ingestion endpoints
+
+This condition is commonly caused by:
+
+- Outbound firewall restrictions
+
+- Proxy misconfiguration
+
+- Missing service tags or required endpoints in restricted networks
+
+- TLS or proxy configuration prevents outbound connections
+
+If a proxy is required and isn't configured for Azure Monitor Agent, upload attempts fail.
+
+- The managed identity or Azure credentials used by the agent can't authenticate
+
+This condition can occur if the agent extension isn't provisioned correctly.
+
+To troubleshoot upload and connectivity issues, see the following guidance:
+
+- Troubleshoot the Azure Monitor agent on Linux virtual machines and scale sets
+
+- How to use the Linux Azure Monitor Agent troubleshooter
+
+- Required network endpoints for Azure Monitor Agent
+
+If Azure Monitor Agent is receiving syslog events but can't upload them, it typically logs errors related to connectivity or authentication in:
+
+`/var/opt/microsoft/azuremonitoragent/log/mdsd.err
+`
+
+## Rsyslog data isn't uploaded due to full disk space
+
+### Symptom
+
+Syslog data isn't uploading: When you inspect the error logs at `/var/opt/microsoft/azuremonitoragent/log/mdsd.err`, you see entries about Error while inserting item to Local persistent store ... No space left on device ... similar to the following snippet:
+
+`2021-11-23T18:15:10.9712760Z: Error while inserting item to Local persistent store syslog.error: IO error: No space left on device: While appending to file: /var/opt/microsoft/azuremonitoragent/events/syslog.error/000555.log: No space left on device
+`
+
+### Cause
+
+Azure Monitor Agent for Linux buffers events to `/var/opt/microsoft/azuremonitoragent/events` before ingestion. On a default Azure Monitor Agent for Linux installation, this directory takes about 650 MB of disk space at idle. The size on disk increases when it's under sustained logging load. It gets cleaned up about every 60 seconds and reduces back to about 650 MB when the load returns to idle.
+
+### Confirm the issue of a full disk
+
+The `df` command shows almost no space available on `/dev/sda1`, as shown in the following output. You should examine the line item that correlates to the log directory (for example, `/var/log`, `/var`, or `/`).
+
+`df -h
+`
+
+`Filesystem Size Used Avail Use% Mounted on
+udev 63G 0 63G 0% /dev
+tmpfs 13G 720K 13G 1% /run
+/dev/sda1 29G 29G 481M 99% /
+tmpfs 63G 0 63G 0% /dev/shm
+tmpfs 5.0M 0 5.0M 0% /run/lock
+tmpfs 63G 0 63G 0% /sys/fs/cgroup
+/dev/sda15 105M 4.4M 100M 5% /boot/efi
+/dev/sdb1 251G 61M 239G 1% /mnt
+tmpfs 13G 0 13G 0% /run/user/1000
+`
+
+You can use the `du` command to inspect the disk to determine which files are causing the disk to be full. For example:
+
+`cd /var/log
+du -h syslog*
+`
+
+`6.7G syslog
+18G syslog.1
+`
+
+In some cases, `du` might not report any large files or directories. It's possible that a file marked as (deleted) is taking up the space. This situation can happen when one process attempts to delete a file, but a different process still has the file open.
+
+You can use the `lsof` command to check for such files. In the following example, you see that `/var/log/syslog` is marked as deleted but it takes up 3.6 GB of disk space. It isn't deleted because a process with PID 1484 still has the file open.
+
+`sudo lsof +L1
+`
+
+`COMMAND PID USER FD TYPE DEVICE SIZE/OFF NLINK NODE NAME
+none 849 root txt REG 0,1 8632 0 16764 / (deleted)
+rsyslogd 1484 syslog 14w REG 8,1 3601566564 0 35280 /var/log/syslog (deleted)
+`
+
+## Rsyslog default configuration logs all facilities to /var/log/
+
+On some popular distros, such as Ubuntu 18.04 LTS, rsyslog ships with a default configuration file (`/etc/rsyslog.d/50-default.conf`). This configuration logs events from nearly all facilities to disk at `/var/log/syslog`. RedHat family Syslog events are stored under `/var/log/` but in a different file: `/var/log/messages`.
+
+Azure Monitor Agent doesn't rely on Syslog events being logged to `/var/log/`. Instead, it configures the rsyslog service to forward events over a TCP port directly to the `azuremonitoragent` service process (mdsd).
+
+### Remove high-volume facilities from rsyslog default configuration
+
+If you're sending a high log volume through rsyslog and your system is set up to log events for these facilities, consider modifying the default rsyslog config to avoid logging and storing them under `/var/log/`. The events for this facility are still forwarded to Azure Monitor Agent because rsyslog uses a different configuration for forwarding placed in `/etc/rsyslog.d/10-azuremonitoragent-omfwd.conf`.
+
+- To remove `local4` events from being logged at `/var/log/syslog` or `/var/log/messages`, change this line in `/etc/rsyslog.d/50-default.conf` from this snippet:
+
+`*.*;auth,authpriv.none -/var/log/syslog
+`
+
+To this snippet (add `local4.none;`):
+
+`*.*;local4.none;auth,authpriv.none -/var/log/syslog
+`
+
+- `sudo systemctl restart rsyslog`
+
+## Next steps
+
+If the steps in this article don't resolve your issue, see:
+
+- Troubleshoot Azure Monitor Agent on Linux VMs and scale sets
+
+- Use the Linux Azure Monitor Agent troubleshooter
+
+- Azure Monitor Agent network configuration
+
+- Create an Azure support request
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+## Feedback
+
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Yes
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ 
+ 
+ 
+ No
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix? 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+## 
+ Additional resources
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+- 
+ 
+ Last updated on 
+ 2026-04-10
+ 
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+### In this article
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Was this page helpful?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Need help with this topic?
+ 
+
+ 
+ Want to try using Ask Learn to clarify or guide you through this topic?
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+ 
+ 
+ 
+ Ask Learn
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Suggest a fix?
