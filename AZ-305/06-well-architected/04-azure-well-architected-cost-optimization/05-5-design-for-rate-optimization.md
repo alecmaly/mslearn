@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/azure-well-architecte
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Design for rate optimization
 
  

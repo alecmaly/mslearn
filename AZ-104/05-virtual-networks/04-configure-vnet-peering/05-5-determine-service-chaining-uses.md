@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/configure-vnet-peerin
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Extend peering with user-defined routes and service chaining
 
  

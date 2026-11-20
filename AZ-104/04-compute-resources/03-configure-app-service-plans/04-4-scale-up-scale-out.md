@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/configure-app-service
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Scale up and scale out Azure App Service
 
  

@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/create-azure-resource
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Exercise - Create and deploy an Azure Resource Manager template
 
  

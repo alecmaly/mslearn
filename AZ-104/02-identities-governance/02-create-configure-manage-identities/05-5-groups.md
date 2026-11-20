@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/create-configure-mana
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Create, configure, and manage groups
 
  

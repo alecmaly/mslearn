@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/host-domain-azure-dns
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Exercise - Create a DNS zone and an A record by using Azure DNS
 
  

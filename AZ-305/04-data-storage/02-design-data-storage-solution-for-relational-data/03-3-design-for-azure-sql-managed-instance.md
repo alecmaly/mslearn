@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-data-storage-s
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Design for Azure SQL Managed Instance
 
  

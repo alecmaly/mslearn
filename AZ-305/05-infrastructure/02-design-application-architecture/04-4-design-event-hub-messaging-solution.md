@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-application-ar
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Design an Azure Event Hubs messaging solution
 
  

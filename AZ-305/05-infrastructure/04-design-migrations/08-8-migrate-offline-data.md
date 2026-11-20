@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-migrations/8-m
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Migrate offline data
 
  

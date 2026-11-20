@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-migrations/4-a
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Assess your on-premises workloads
 
  

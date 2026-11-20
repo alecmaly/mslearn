@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-governance/1-i
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Introduction
 
  

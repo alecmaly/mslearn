@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/monitor-azure-vm-usin
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Monitoring for Azure VMs
 
  

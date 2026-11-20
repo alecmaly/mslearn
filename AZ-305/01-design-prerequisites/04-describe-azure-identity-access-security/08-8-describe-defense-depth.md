@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/describe-azure-identi
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Describe defense-in-depth
 
  

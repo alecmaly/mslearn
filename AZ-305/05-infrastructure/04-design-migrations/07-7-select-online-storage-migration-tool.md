@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-migrations/7-s
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Select an online storage migration tool for unstructured data
 
  

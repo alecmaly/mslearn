@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/describe-high-availab
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Summary
 
  

@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-solution-for-b
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Design for Azure virtual machine backup and recovery
 
  

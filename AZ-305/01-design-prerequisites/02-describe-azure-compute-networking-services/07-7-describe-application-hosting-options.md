@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/describe-azure-comput
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Describe application hosting options
 
  

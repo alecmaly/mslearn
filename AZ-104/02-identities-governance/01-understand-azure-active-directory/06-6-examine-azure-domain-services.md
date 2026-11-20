@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/understand-azure-acti
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Examine Microsoft Entra Domain Services
 
  

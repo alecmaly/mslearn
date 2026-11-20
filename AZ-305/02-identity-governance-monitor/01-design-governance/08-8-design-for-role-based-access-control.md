@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-governance/8-d
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Design for role-based access control (RBAC)
 
  

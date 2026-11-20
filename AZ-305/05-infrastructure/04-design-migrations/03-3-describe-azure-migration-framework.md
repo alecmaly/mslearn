@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-migrations/3-d
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Describe the Azure migration framework
 
  

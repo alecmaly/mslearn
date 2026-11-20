@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-migrations/2-e
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Evaluate migration with the Cloud Adoption Framework
 
  

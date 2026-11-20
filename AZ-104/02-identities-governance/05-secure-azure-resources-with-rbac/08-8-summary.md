@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/secure-azure-resource
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Summary
 
  

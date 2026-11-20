@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/configure-azure-app-s
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Implement Azure App Service
 
  

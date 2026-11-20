@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/cloud-adoption-framew
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Ready
 
  

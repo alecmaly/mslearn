@@ -4,8 +4,6 @@ Source: https://learn.microsoft.com/en-us/training/modules/design-governance/10-
 
 ---
 
-unit-inner-section" class="section is-uniform position-relative">
- 
 # Module assessment
 
  
