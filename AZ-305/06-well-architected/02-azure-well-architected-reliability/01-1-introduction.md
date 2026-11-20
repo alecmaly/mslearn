@@ -1,0 +1,51 @@
+# Unit 1: 1-introduction
+
+Source: https://learn.microsoft.com/en-us/training/modules/azure-well-architected-reliability/1-introduction
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# Introduction
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 1 minute
+
+ 
+ 
+
+ 
+
+ 
+ The Reliability pillar in the Azure Well-Architected Framework helps ensure that your workload is resilient, available, and recoverable.
+
+You have to be prepared for outages and malfunctions in your workload. A reliable workload must survive those events and keep running smoothly. It must be resilient enough to detect, withstand, and recover from failures quickly. It must also be available so that users can access it when they need to, at the promised quality level.
+
+Your workload's architecture should include reliability measures in its application code, infrastructure, and operations. Design choices should strive to align with business requirements without making major trade-offs.
+
+The concepts described in this module aren't all-inclusive of reliability in a workload, but they represent the core principles and some of their key approaches. For a complete overview of the Well-Architected Framework pillars, check out the Azure Well-Architected Framework as you start planning and designing your architecture.
+
+Each unit in this module dives into one design principle and three approaches for that principle. You can find examples of the approaches in each unit to see how they can be applied to real-world scenarios. The examples are all based on fictional companies.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section

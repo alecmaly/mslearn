@@ -1,0 +1,277 @@
+# Unit 9: 9-knowledge-check
+
+Source: https://learn.microsoft.com/en-us/training/modules/design-data-storage-solution-for-relational-data/9-knowledge-check
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# Module assessment
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 3 minutes
+
+ 
+ 
+
+ 
+
+ 
+ Tailwind Traders has several workloads that are being migrated to Azure. You're reviewing all application database requirements to recommend the appropriate solution. Your design has to accommodate the following scenarios:
+
+- Inventory application. You plan to migrate the inventory application with a database to the cloud, but you use a non-Microsoft application that requires Windows authentication. You also need full control and customization, including OS access.
+
+- HR application. You need to migrate the HR application and database to the cloud, and remove some of the management associated with SQL Server. However, your application uses intra-scoped features, CLR and Service Broker capabilities, in SQL Server.
+
+- Database migration. There are a few large on-premises SQL server databases that need to be migrated to the cloud. These databases contain anywhere from 40 TB to 80 TB of data.
+
+### Answer the following questions
+
+Choose the best response for each question.
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ 1.
+ Which Azure SQL deployment option should be the easiest method to migrate the Inventory application?
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Azure SQL Managed Instance
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Azure SQL Database, single database
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ SQL Server on Azure Virtual Machines
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 2.
+ What's the optimal Azure SQL deployment option to migrate the HR application?
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ Azure SQL Managed Instance
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Azure SQL Database
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ SQL Server in an Azure virtual machine
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+ 
+ 
+ 3.
+ Which database service tier best supports the large on-premises database migration?
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ General Purpose
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Hyperscale
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Business Critical
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ You must answer all questions before checking your work.
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ You must answer all questions before checking your work.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section

@@ -1,0 +1,77 @@
+# Unit 9: 9-configuration-management-solution
+
+Source: https://learn.microsoft.com/en-us/training/modules/design-application-architecture/9-configuration-management-solution
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# Design an app configuration management solution
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 3 minutes
+
+ 
+ 
+
+ 
+
+ 
+ Traditionally, shipping a new application feature requires a complete redeployment of the application itself. Testing or deployment of a feature often requires multiple versions of the application. Each deployment might require different configurations, credentials, changing settings or parameters for testing.
+
+Configuration management is a modern software-development practice that decouples configuration from code deployment and enables quick changes to feature availability on demand. Decoupling configuration as a service enables systems to dynamically administer the deployment lifecycle.
+
+Let's examine an Azure solution that can help you focus on deployment issues.
+
+### Things to know about Azure App Configuration
+
+Azure App Configuration provides a service to centrally manage application settings and feature flags. You can use App Configuration to store all the settings for your application and secure their accesses in one place.
+
+App Configuration offers many benefits for an application architecture. As you review the features, consider how Azure App Configuration can support deployment for the Tailwind Traders applications.
+
+- Azure App Configuration is a fully managed service that can be set up in minutes, and supports native integration with popular frameworks.
+
+- App Configuration offers flexible key representations and mappings, and configuration snapshots - immutable point-in-time captures of all settings used for deployment rollback and audit.
+
+- App Configuration has a dedicated UI for feature flag management, and supports resource tagging with labels.
+
+- Geo-replication allows App Configuration stores to be replicated across Azure regions for reduced latency and increased availability in multi-region scenarios.
+
+- You can compare two sets of configurations on custom-defined dimensions.
+
+- App Configuration provides enhanced security through Microsoft Entra managed identities for Azure resources.
+
+- Sensitive information can be encrypted at rest and in transit.
+
+- Azure App Configuration works in both development and production environments.
+
+#### Development
+
+An Azure App Configuration development environment consists of Visual Studio, Visual Studio Code, and the Azure CLI. These components are linked to Microsoft Entra ID, App Configuration, and Azure Key Vault.
+
+#### Production
+
+An Azure App Configuration production environment consists of Azure and Microsoft Entra managed identities for Azure resources with related Azure services. These components are linked to Microsoft Entra ID, App Configuration, and Key Vault.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section

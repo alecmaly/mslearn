@@ -1,0 +1,196 @@
+# Unit 4: 4-design-outbound-connectivity-routing
+
+Source: https://learn.microsoft.com/en-us/training/modules/design-network-solutions/4-design-outbound-connectivity-routing
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# Design outbound connectivity and routing
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 7 minutes
+
+ 
+ 
+
+ 
+
+ 
+ Part of the planning for your Azure AI-ready network solution includes exploring how to support outbound network connectivity and traffic communication routing.
+
+Azure routes communication traffic between your on-premises internal resources and external internet resources by using route tables. When you create a virtual network, Azure automatically creates a routing table for each subnet in the network. A routing table contains many different types of routes, including system, service endpoints, and subnet defaults. The table also has route entries for the Border Gateway Protocol (BGP), user-defined routes (UDRs), and routes from other virtual networks.
+
+Important
+
+Default outbound access retirement: As of March 31, 2026, new virtual networks no longer receive default outbound internet access. Private subnets are now the default behavior. For new Azure deployments that require outbound internet connectivity, you must explicitly configure NAT Gateway or another outbound method (Azure Firewall, public IP, Load Balancer outbound rules).
+
+#### Business scenarios
+
+- Support on-demand outbound-to-internet connectivity without preallocation.
+
+- Configure one or more static public IP addresses for scale.
+
+- Enable configurable idle timeout.
+
+- Allow TCP reset for unrecognized connections.
+
+### Things to know about routing tables and routes
+
+Let's take a closer look at the characteristics of routing tables and the route types.
+
+- System routes: When you create a virtual network for the first time without defining any subnets, Azure creates system route entries in the routing table. System routes are defined for a specific location when they're created. System routes can't be modified after they're created, but you can override these routes by configuring UDRs.
+
+- User-defined routes (custom): When you create one or multiple subnets inside a virtual network, Azure creates default entries in the routing table to enable communication between these subnets within a virtual network. These routes can be modified by using static routes, which are stored as UDRs in Azure. UDRs are also called custom routes. You create UDRs in Azure to override Azure's default system routes, or to add more routes to a subnet's route table.
+
+- Routes from other virtual networks: When you create a virtual network peering between two virtual networks, a route is added for each address range within the address space of each peered virtual network.
+
+- Border Gateway Protocol routes: If your on-premises network gateway exchanges BGP routes with an Azure Virtual Network gateway, a route is added for each route propagated from the on-premises network gateway. These routes appear in the routing table as BGP routes.
+
+- Service endpoint routes: The public IP addresses for certain services are added to the route table by Azure when you enable a service endpoint to the service. Service endpoints are enabled for individual subnets within a virtual network. When you enable a service endpoint, a route is only added to the route table for the subnet that belongs to this service. Azure manages the addresses in the route table automatically when the addresses change.
+
+- Routing order: When you have competing entries in a routing table, Azure selects the next hop based on the longest prefix match similar to traditional routers. If there are multiple next hop entries with the same address prefix, Azure selects routes in a specific order: UDRs, then BGP routes, and then system routes.
+
+### Things to consider when using routing tables and routes
+
+There are many networking scenarios where defining and overriding routes can be an advantage. Review the following suggestions and consider the routes required to support the Tailwind Traders solution.
+
+- Consider system routes. Define system routes for specific locations and scenarios that you don't expect to modify.
+
+- Route traffic between virtual machines in the same virtual network or between peered virtual networks.
+
+- Support communication between virtual machines by using a virtual network-to-network VPN.
+
+- Enable site-to-site communication through Azure ExpressRoute or an Azure VPN gateway.
+
+- Consider user defined routes. Create custom UDRs to override Azure's default system routes, or to add more routes to a subnet's route table.
+
+- Enable filtering of internet traffic by using Azure Firewall or forced tunneling.
+
+- Flow traffic between subnets through a Network Virtual Appliance (NVA).
+
+- Define routes to specify how packets should be routed in a virtual network.
+
+- Define routes that control network traffic and specify the next hop in the traffic flow.
+
+- Consider overriding routes. Plan for route overrides to control traffic flow.
+
+- Flow through NVA: Configure route tables to force traffic between subnets to flow through an NVA.
+
+- Forced tunneling: Force all internet-bound traffic through an NVA, or on-premises, through an Azure VPN gateway.
+
+ 
+
+ 
+## Check your knowledge
+
+ 
+ 
+ 
+ 
+ 
+ 1.
+ Which route would you use for a specific location where you don't expect to modify the traffic pattern?
+
+ 
+ 
+
+ 
+ 
+ 
+ 
+ 
+ System routes.
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ User defined routes.
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+ 
+ 
+ 
+ Custom or overriding routes.
+
+ 
+
+ 
+ 
+ 
+ 
+
+ 
+ 
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ You must answer all questions before checking your work.
+
+ 
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+
+ You must answer all questions before checking your work.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section

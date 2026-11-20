@@ -1,0 +1,78 @@
+# Unit 7: 7-associate-public-ip-addresses
+
+Source: https://learn.microsoft.com/en-us/training/modules/configure-virtual-networks/7-associate-public-ip-addresses
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# Associate public IP addresses
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 4 minutes
+
+ 
+ 
+
+ 
+
+ 
+ A public IP address resource can be associated with virtual machine network interfaces, internet-facing load balancers, VPN gateways, and application gateways. You can associate your resource with both dynamic and static public IP addresses.
+
+### Things to consider when associating public IP addresses
+
+The next table summarizes how you can associate public IP addresses for different types of resources.
+
+Top-level resource
+IP address configuration
+
+Virtual machine
+Network interface configuration
+
+Virtual Network Gateway (VPN), Virtual Network Gateway (ER), NAT Gateway
+Gateway IP configuration
+
+Public Load Balancer, Application Gateway, Azure Firewall, Route Server, API Management
+Front-end configuration
+
+Bastion host
+Public IP configuration
+
+#### Public IP address SKU features
+
+The next table summarizes the standard SKU features.
+
+Public IP address
+Standard SKU
+
+Allocation method
+Static
+
+Security
+Secure by default model
+
+Available zones
+Supported. Standard IPs can be nonzonal, zonal, or zone-redundant.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section

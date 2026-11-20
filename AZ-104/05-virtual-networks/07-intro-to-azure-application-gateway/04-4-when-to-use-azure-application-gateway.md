@@ -1,0 +1,67 @@
+# Unit 4: 4-when-to-use-azure-application-gateway
+
+Source: https://learn.microsoft.com/en-us/training/modules/intro-to-azure-application-gateway/4-when-to-use-azure-application-gateway
+
+---
+
+unit-inner-section" class="section is-uniform position-relative">
+ 
+# When to use Azure Application Gateway
+
+ 
+ 
+ 
+ Completed
+ 
+ 
+ 
+
+ 
+
+ 
+ 
+- 3 minutes
+
+ 
+ 
+
+ 
+
+ 
+ Azure Application Gateway can meet your organizationâs needs for the following reasons:
+
+- Azure Application Gateway routing allows traffic to be directed from an endpoint in Azure to a back-end pool made up of servers running in Adatum's on-premises datacenter, provided private network connectivity is configured. Health probes identify unhealthy servers so the gateway can stop directing new requests to them.
+
+- Azure Application Gateway TLS termination offloads the backend CPU work for TLS encryption and decryption when it forwards requests over unencrypted HTTP. If Adatum configures end-to-end TLS, backend servers still need a valid server certificate and perform TLS processing.
+
+- With WAF_v2 and an enabled WAF policy in Prevention mode, Adatum can block requests identified as attacks, such as SQL injection and cross-site scripting, before they're forwarded to backend servers. Tune and test the policy against legitimate application traffic before enforcing it.
+
+- Adatum can enable cookie-based affinity to route clients that retain and return the affinity cookie to the same healthy backend server. Applications that store session state locally still need a state-management and recovery design if a server fails or is removed.
+
+Important
+
+To use Adatum's private on-premises servers as backend targets, establish IP connectivity from the Application Gateway virtual network, for example through a site-to-site VPN or ExpressRoute. Configure routing, name resolution, and firewall rules so the gateway can reach the application and its health-probe endpoint. Adding a private IP address to a backend pool doesn't create this connection.
+
+## When not to use Azure Application Gateway
+
+Application Gateway might be unnecessary when an application's existing hosting platform already meets its traffic-management and security requirements, and the gateway's additional cost and operational complexity aren't justified. Low traffic or a single backend doesn't by itself rule out Application Gateway. Features such as WAF protection with WAF_v2, TLS termination, redirection, and request rewriting can still be useful without distributing requests across multiple servers. A gateway doesn't make a single backend highly available.
+
+Azure provides other load balancing solutions, including Azure Front Door, Azure Traffic Manager, and Azure Load Balancer. The following list describes the differences between these services:
+
+- Front Door is an application delivery network that provides global load balancing and site acceleration service for web applications. It offers Layer 7 capabilities for your application like TLS offload, path-based routing, fast failover, web application firewall, and caching to improve performance and high-availability of your applications. Choose this option in scenarios such as load balancing a web app deployed across multiple Azure regions.
+
+- Traffic Manager is a DNS-based traffic load balancer that enables you to distribute traffic optimally to services across global Azure regions while providing high availability and responsiveness. Because Traffic Manager is a DNS-based load-balancing service, it load-balances only at the domain level. For that reason, it can't fail over as quickly as Front Door because of common challenges around DNS caching and systems not honoring DNS TTLs.
+
+- Azure Standard Load Balancer provides Layer 4 load balancing for TCP and UDP traffic. Regional deployments distribute connections within a region. The Global tier distributes traffic across public regional load balancers. Zone redundancy depends on the frontend configuration and the region's availability-zone support. Backends must also be distributed appropriately if the application needs to survive a zone failure.
+
+ 
+
+ 
+ 
+
+ 
+
+ 
+ 
+ 
+ <section
